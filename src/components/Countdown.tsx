@@ -1,3 +1,4 @@
+import { set } from 'js-cookie';
 import { useContext } from 'react'
 import { CountDownContext } from '../contexts/CountDownContext';
 import styles from '../styles/components/Countdown.module.css'
@@ -10,6 +11,9 @@ export function Countdown() {
         hasFinished,
         isActive,
         startCountdown,
+        set25Minutes,
+        set40Minutes,
+        set50Minutes,
         resetCountdown } = useContext(CountDownContext)
 
     const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('');
@@ -51,6 +55,20 @@ export function Countdown() {
                                     Iniciar um ciclo
                                     <img src="icons/play_arrow.svg" alt="Play" />
                                 </button>}
+                            {isActive?
+                            null:
+                            <div className={styles.changeTimeDiv}>
+                                <button type="button" className={styles.changeTime} onClick={set25Minutes}>
+                                    25m
+
+                                                                    </button>
+                                <button type="button" className={styles.changeTime} onClick={set40Minutes}>
+                                    40m
+                                                                    </button>
+                                <button type="button" className={styles.changeTime} onClick={set50Minutes}>
+                                    50m
+                                                                    </button>
+                            </div>}
                         </>
                     )
             }

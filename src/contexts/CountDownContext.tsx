@@ -11,6 +11,10 @@ interface CountDownContextData {
     isActive: boolean;
     startCountdown: () => void;
     resetCountdown: () => void;
+    timePreset: number;
+    set25Minutes: () => void;
+    set40Minutes: () => void;
+    set50Minutes: () => void;
 }
 interface CountdownProviderProps {
     children: ReactNode;
@@ -23,8 +27,8 @@ let countdownTimeout: NodeJS.Timeout
 export function CountdownProvider({ children }: CountdownProviderProps) {
 
     const { startNewChallenge } = useContext(ChallengesContext)
-
-    const [time, setTime] = useState(25  * 60);
+    const [timePreset, setTimePreset] = useState(25)
+    const [time, setTime] = useState(timePreset * 60);
     const [isActive, setActive] = useState(false);
     const [hasFinished, setFinished] = useState(false)
 
@@ -39,7 +43,19 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         clearTimeout(countdownTimeout)
         setActive(false)
         setFinished(false)
-        setTime(0.1 * 60)
+        setTime(timePreset * 60)
+    }
+    function set40Minutes() {
+        clearTimeout(countdownTimeout)
+        setTime(40 * 60)
+    }
+    function set25Minutes() {
+        clearTimeout(countdownTimeout)
+        setTime(25 * 60)
+    }
+    function set50Minutes() {
+        clearTimeout(countdownTimeout)
+        setTime(50 * 60)
     }
 
     useEffect(() => {
@@ -62,7 +78,11 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
                 hasFinished,
                 isActive,
                 startCountdown,
-                resetCountdown
+                resetCountdown,
+                timePreset,
+                set25Minutes,
+                set40Minutes,
+                set50Minutes,
             }}>
             {children}
         </CountDownContext.Provider>

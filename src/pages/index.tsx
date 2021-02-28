@@ -23,7 +23,7 @@ export default function Home(props: HomeProps) {
     <ChallengeProvider level={props.level} currentExperience={props.currentExperience} challengesCompleted={props.challengesCompleted}>
       <div className={styles.container}>
         <Head>
-          <title>Inicio | move.it </title>
+          <title>Inicio | se.mexe </title>
         </Head>
         <ExperienceBar />
         <CountdownProvider>
